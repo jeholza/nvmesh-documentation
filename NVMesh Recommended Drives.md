@@ -9,7 +9,7 @@ This document is also stored in this git repository: [https://gitlab-master.nvid
 | [25.06](https://docs.google.com/document/d/1d-ZFTyzTHXnlX40iwuDBH4MhzTFs28NqDe5hI2hQORs/edit?usp=sharing) | 2025-06-19 | [Yaniv Romem IL](mailto:yaniv@nvidia.com) | First version, includes only validated drives |
 | [25.07](https://docs.google.com/document/d/14aVBIaF6ihCKNC5MWc1xGTHWE5kQgSRxG87cpzzsCFc/edit?usp=sharing) | 2025-07-02 | [Yaniv Romem IL](mailto:yaniv@nvidia.com) | Added multiple Gen5 drives in validation |
 | [25.12](https://docs.google.com/document/d/1F4KFGfKgC71bCh_-db-LeUHHGnTaF1yy-f3D4QSx3og/edit?usp=sharing) | 2025-12-21 | [Yaniv Romem IL](mailto:yaniv@nvidia.com) | Kioxia CD8-P removed after Kioxia reported 4k+8 support dropped. Kioxia CM7 validated. Samsung PM9D3a validated. |
-| 26.01 | 2026-01-26 | [Yaniv Romem IL](mailto:yaniv@nvidia.com) | Separated Gen4 and Gen5 and moved to table format. Added Revision History instead of creating new documents. Solidigm PS1010 and PS1030 validated. Putting in a git repo in md format for sake-keeping. |
+| 26.01 | 2026-01-26 | [Yaniv Romem IL](mailto:yaniv@nvidia.com) | Separated Gen4 and Gen5 and moved to table format. Added Revision History instead of creating new documents. Solidigm PS1010 in validation and PS1030 validated. Putting in a git repo in md format for safe-keeping. |
 
 # **Source of Truth**
 
@@ -35,7 +35,7 @@ The preferred drives in alphabetical vendor order as follows. Non-certified driv
 | Samsung | PM1743 |  |
 |  | PM1753 | Currently in validation with high probability of passing. |
 |  | PM9D3a |  |
-| Solidigm | PS1010 |  |
+| Solidigm | PS1010 | Currently in validation with high probability of passing. |
 |  | PS1030 | Requires firmware G75YG154. |
 
 ## **Gen4 Drives**
@@ -61,7 +61,7 @@ The preferred drives are listed in alphabetical order. Gen5 drives are preferred
    1. Dapustor H5300  
    2. Kioxia CM7  
    3. Samsung PM1743 and PM9D3a  
-   4. Solidigm PS1010 and PS1030  
+   4. Solidigm PS1030  
 2. Gen4 drives:  
    1. Exascend PD4  
    2. Micron 6500 ION  
@@ -71,7 +71,8 @@ The preferred drives are listed in alphabetical order. Gen5 drives are preferred
 
 Additional drives for consideration, currently under NVIDIA validation, for which final approval by NVIDIA will be needed:
 
-1. Samsung PM1753 (Gen5)
+1. Samsung PM1753 (Gen5)  
+2. Solidigm PS1010 (Gen5)
 
 Other drives for consideration for which approval by NVIDIA will be needed, but not currently in validation:
 
