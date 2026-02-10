@@ -56,26 +56,17 @@ The preferred drives in alphabetical vendor order as follows. Non-certified driv
 
 # **Wording for External NCPs**
 
-The preferred drives are listed in alphabetical order. Gen5 drives are preferred over Gen4.
+The preferred drives are as follows in alphabetical order. Gen5 drives are preferred over Gen4.
 
-1. Gen5 drives:  
-   1. Dapustor H5300  
-   2. Kioxia CM7  
-   3. Samsung PM1743 and PM9D3a  
-   4. Solidigm PS1010/1030  
-2. Gen4 drives:  
-   1. Exascend PD4  
-   2. Micron 6500 ION  
-   3. Phison EPW5970  
-   4. Samsung PM1733 and PM1735  
-   5. Solidigm P55xx and P56xx
+1. Gen5: Dapustor H5300, Kioxia CM7, Samsung PM1743 and PM9D3a, Solidigm PS1010/1030  
+2. Gen4: Exascend PD4, Micron 6500 ION, Phison EPW5970, Samsung PM1733 and PM1735, Solidigm P55xx and P56xx
 
 Additional drives for consideration, currently under NVIDIA validation, for which final approval by NVIDIA will be needed:
 
-1. Samsung PM1753 (Gen5)
+1. Gen5: Samsung PM1753
 
 Other drives for consideration for which approval by NVIDIA will be needed, but not currently in validation:
 
-1. Kioxia CD8 (Gen4)  
-2. Micron 6550 ION (Gen5)
+1. Gen5: Micron 6550 ION  
+2. Gen4: Kioxia CD8
 
