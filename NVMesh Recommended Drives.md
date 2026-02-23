@@ -10,7 +10,7 @@ This document is also stored in this git repository: [https://gitlab-master.nvid
 | [25.07](https://docs.google.com/document/d/14aVBIaF6ihCKNC5MWc1xGTHWE5kQgSRxG87cpzzsCFc/edit?usp=sharing) | 2025-07-02 | [Yaniv Romem IL](mailto:yaniv@nvidia.com) | Added multiple Gen5 drives in validation |
 | [25.12](https://docs.google.com/document/d/1F4KFGfKgC71bCh_-db-LeUHHGnTaF1yy-f3D4QSx3og/edit?usp=sharing) | 2025-12-21 | [Yaniv Romem IL](mailto:yaniv@nvidia.com) | Kioxia CD8-P removed after Kioxia reported 4k+8 support dropped. Kioxia CM7 validated. Samsung PM9D3a validated. |
 | 26.01 | 2026-01-26 | [Yaniv Romem IL](mailto:yaniv@nvidia.com) | Separated Gen4 and Gen5 and moved to table format. Added Revision History instead of creating new documents. Solidigm PS1010 in validation and PS1030 validated. Putting in a git repo in md format for safe-keeping. |
-| 26.02 | 2026-02-10 | [Yaniv Romem IL](mailto:yaniv@nvidia.com) | Added PS1010 after Solidigm confirmed that the controller and driver are the same as for PS1030 with the only difference being the overprovisioning. |
+| 26.02 | 2026-02-10 | [Yaniv Romem IL](mailto:yaniv@nvidia.com) | Added PS1010 after Solidigm confirmed that the controller and driver are the same as for PS1030 with the only difference being the over-provisioning. |
 
 # **Source of Truth**
 
