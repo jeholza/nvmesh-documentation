@@ -166,4 +166,6 @@ words:
 	- dearmor
 	- inkey
 	- noprompt
-	- 
+	- upgrader
+	- EWOULDBLOCK
+	- sendto
