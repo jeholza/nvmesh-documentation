@@ -32,9 +32,11 @@ See [Release Index](https://nvidia.atlassian.net/wiki/spaces/NSV/pages/283179351
 
 A few options have been added to the `toma_rpc` application to facilitate overcoming field issues. These options were added as a means to overcome reversion of specific TOMA issues that have been fixed in the interim. Nevertheless, these options may be useful in certain unexpected scenarios instead of restarting TOMAs and thus provide SREs with additional optionality.
 
-[NVMESH-7068](https://jirasw.nvidia.com/browse/NVMESH-7068) \- Addition of a `toma_rpc` command to instruct the local TOMA to stop being the leader.
+[NVMESH-7068](https://jirasw.nvidia.com/browse/NVMESH-7068) \- Addition of a `toma_rpc` command to instruct the local TOMA to stop being the leader. This is done as follows:
+- `toma_rpc simulate reelect`
 
-[NVMESH-7072](https://jirasw.nvidia.com/browse/NVMESH-7072) \- Addition of a `toma_rpc` command to instruct the TOMAs to resend all volume statuses to management to resynchronize them. The command can also be limited to a specific volume.
+[NVMESH-7072](https://jirasw.nvidia.com/browse/NVMESH-7072) \- Addition of a `toma_rpc` command to instruct the TOMAs to resend all volume statuses to management to resynchronize them. The command can also be limited to a specific volume. This is done as follows:
+- `toma_rpc simulate resend-praids-report all/<volume_name>`
 
 ## NVMesh Observability Enhancements
 
