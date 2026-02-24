@@ -56,6 +56,8 @@ Integrated management support for OpenTelemetry (OTEL) traces has been added. It
 
 NVMesh 3.4.0 introduces new options for pinning IO of specific volumes to specific CPU cores. This is useful for machines running multiple applications requiring different volumes that are CPU-core separated, e.g., when a volume is used only by a specific container or VM and it is pinned to specific CPU cores. In that case, it makes sense to pin the IO to that volume the same cores, [NVMESH-6156](https://jirasw.nvidia.com/browse/NVMESH-6156).
 
+**<u>Note:</u>** This is alpha level functionality and has not undergone any QA.
+
 ## Performance Improvements for Ethernet Multi-Rail Environments
 
 In Ethernet multi-rail environments, many connection attempts will fail. Improvements were made to reduce the affect this has during error situations so that reconnection and IO resumption is significantly faster, [NVMESH-7778](https://jirasw.nvidia.com/browse/NVMESH-7778).
