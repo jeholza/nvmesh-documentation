@@ -163,3 +163,12 @@ The updated NVMesh support matrix is available at [NVMesh Support Matrix](https:
 Upgrading from this version to future versions will be best conducted using the mNDU feature, see above for more details.
 
 Upgrading from versions prior to NVMesh 3.2.0-HF2 is not possible. Upgrading from 3.2.0-HF2 is with a cold upgrade. From NVMesh 3.3.0 and onwards, it is recommended to perform upgrades using mNDU. For these versions, hot upgrade is supported.
+
+**Note:** For users running Ubuntu 22.04 and above, it is required to disable automatic service restarts during package upgrades. Ubuntu uses a utility called needrestart that may trigger an automatic restart of product services during an apt install or upgrade.
+To prevent this for our services, create the following configuration file on your Ubuntu nodes:
+
+Path: /etc/needrestart/conf.d/needrestart_nvmesh.conf
+
+File Content:
+$nrconf{override_rc} ||= {};
+$nrconf{override_rc}->{qr(^nvmesh.*\.service$)} = 0;
