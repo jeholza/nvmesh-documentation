@@ -170,3 +170,5 @@ words:
 	- EWOULDBLOCK
 	- sendto
 	- Unticketed
+	- needrestart
+	- nrconf

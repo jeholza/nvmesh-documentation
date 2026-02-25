@@ -160,7 +160,7 @@ Template for new table entries
 
 The updated NVMesh support matrix is available at [NVMesh Support Matrix](https://confluence.nvidia.com/display/NSV/NVMesh+Support+Matrix).
 
-**Note:** Kernels from 6.8.0 up until 6.14.6 suffer from a kernel workqueue crash in ​​cma_netevent_work_handler, as described [here](https://bugzilla.redhat.com/show_bug.cgi?id=2363273). NVMesh is incompatible with these kernels ([NVMESH-6447](https://jirasw.nvidia.com/browse/NVMESH-6447)) as is. The NVMesh team has inserted a patched version of the relevant non-NVMesh kernel modules to fix this issue and make NVMesh compatible.
+**<u>Note:</u>** Kernels from 6.8.0 up until 6.14.6 suffer from a kernel workqueue crash in ​​cma_netevent_work_handler, as described [here](https://bugzilla.redhat.com/show_bug.cgi?id=2363273). NVMesh is incompatible with these kernels ([NVMESH-6447](https://jirasw.nvidia.com/browse/NVMESH-6447)) as is. The NVMesh team has inserted a patched version of the relevant non-NVMesh kernel modules to fix this issue and make NVMesh compatible.
 
 # Upgrade
 
@@ -168,9 +168,8 @@ Upgrading from this version to future versions will be best conducted using the 
 
 Upgrading from versions prior to NVMesh 3.2.0-HF2 is not possible. Upgrading from 3.2.0-HF2 is with a cold upgrade. From NVMesh 3.3.0 and onwards, it is recommended to perform upgrades using mNDU. For these versions, hot upgrade is supported.
 
-**Note:** For users running Ubuntu 22.04 and above, it is required to disable automatic service restarts during package upgrades. Ubuntu uses a utility called needrestart that may trigger an automatic restart of product services during an apt install or upgrade. To prevent this for our services, create the following configuration file on your Ubuntu nodes:
-
-Path: /etc/needrestart/conf.d/needrestart_nvmesh.conf
-
-File Content: $nrconf{override_rc} ||= {};
+**<u>Note:</u>** For Ubuntu 22.04 and above, it is required to disable automatic service restarts during package upgrades. Ubuntu uses a utility called `needrestart` that may trigger an automatic restart of NVMesh services during an `apt install` or `apt upgrade`. To prevent this for the NVMesh services, create the a configuration file named `/etc/needrestart/conf.d/needrestart_nvmesh.conf` with the following contents:
+```
+$nrconf{override_rc} ||= {};
 $nrconf{override_rc}->{qr(^nvmesh.\*\.service$)} = 0;
+```
