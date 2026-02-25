@@ -24,7 +24,7 @@ See [Release Index](https://nvidia.atlassian.net/wiki/spaces/NSV/pages/283179351
 ## Managed NDU Completion and Optimizations
 
 [NVMESH-2557](https://jirasw.nvidia.com/browse/NVMESH-2557) \- The scope of mNDU now includes upgrading management itself, the nvmesh-upgrader agents and the interopDB. The end-to-end upgrade is initiated by upgrading and restarting a single management. Then this upgraded management can be instructed to upgrade the rest of the cluster.
-- For previous upgrade agents, i.e., prior to NVMesh 3.4.0, they will not auto-upgrade, so they will need to be restarted manually on all nodes running NVMesh.
+- For previous upgrade agents, i.e., prior to NVMesh 3.4.0, these will not be auto-upgraded, so the new version of the upgrader will have to be installed and restarted manually on all nodes running NVMesh.
 
 [NVMESH-6594](https://jirasw.nvidia.com/browse/NVMESH-6594) \- Multiple clients can now be upgraded concurrently, i.e., in parallel instead of one by one. In addition, mNDU does not stop on a single upgrade failure. Instead, it stops after some user-set number of failures.
 
@@ -46,13 +46,15 @@ Some `/proc` additions and changes have been implemented as part of these enhanc
 
 ## REST API for Metadata Management
 
-Prior to NVMesh 3.4.0, it was possible to insert arbitrary fields in volume definitions through REST CRUD operations as long as they did not collide with fields needed by management. To make this more robust, only management fields are allowed in the base volume object hereon. Now, user-defined fields can only be set within the volume's metadata section, [NVMESH-5320](https://jirasw.nvidia.com/browse/NVMESH-5320). 
+Prior to NVMesh 3.4.0, it was possible to insert arbitrary fields in volume definitions through REST CRUD operations. This was not limited, so it was possible to collide with fields used by management itself. To make this more robust, only management fields are allowed in the base volume object hereon. User-defined fields can only be set within the volume's metadata section, [NVMESH-5320](https://jirasw.nvidia.com/browse/NVMESH-5320). 
 
 Volume metadata can also be managed via the CLI, [NVMESH-7010](https://jirasw.nvidia.com/browse/NVMESH-7010).
 
 ## Integrated OTEL Support
 
 Integrated management support for OpenTelemetry (OTEL) traces has been added. It runs auto-instrumentation for several adjunct components, i.e., MongoDB, Kafka and NodeJS, which generate a significant amount of traces. NVMesh management itself generates a small amount of traces reporting on the the internal management queue length.
+
+Integrated OTEL support is disabled by default and can be enabled via `management.js.conf` via the options in `config.openTelemetry`.
 
 ## CPU Pinning and "Noisy Neighbor" Reduction
 
