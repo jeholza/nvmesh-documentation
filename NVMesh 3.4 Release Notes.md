@@ -9,9 +9,9 @@ SPDX-License-Identifier: Apache-2.0
 
 # Change log
 
-| Version | Date | Release | Soul |
-| :-----: | :-----: | :-----: | ----- |
-| 1.0 | <nobr>2025-02-26</nobr> | 3.4.0 | First release of NVMesh 3.4.0. |
+| Version |          Date           | Release | Soul                           |
+| :-----: | :---------------------: | :-----: | ------------------------------ |
+|   1.0   | <nobr>2025-02-26</nobr> |  3.4.0  | First release of NVMesh 3.4.0. |
 
 # General
 
@@ -24,6 +24,7 @@ See [Release Index](https://nvidia.atlassian.net/wiki/spaces/NSV/pages/283179351
 ## Managed NDU Completion and Optimizations
 
 [NVMESH-2557](https://jirasw.nvidia.com/browse/NVMESH-2557) \- The scope of mNDU now includes upgrading management itself, the nvmesh-upgrader agents and the interopDB. The end-to-end upgrade is initiated by upgrading and restarting a single management. Then this upgraded management can be instructed to upgrade the rest of the cluster.
+
 - For previous upgrade agents, i.e., prior to NVMesh 3.4.0, these will not be auto-upgraded, so the new version of the upgrader will have to be installed and restarted manually on all nodes running NVMesh.
 
 [NVMESH-6594](https://jirasw.nvidia.com/browse/NVMESH-6594) \- Multiple clients can now be upgraded concurrently, i.e., in parallel instead of one by one. In addition, mNDU does not stop on a single upgrade failure. Instead, it stops after some user-set number of failures.
@@ -33,9 +34,11 @@ See [Release Index](https://nvidia.atlassian.net/wiki/spaces/NSV/pages/283179351
 A few options have been added to the `toma_rpc` application to facilitate overcoming field issues. These options were added as a means to overcome reversion of specific TOMA issues that have been fixed in the interim. Nevertheless, these options may be useful in certain unexpected scenarios instead of restarting TOMAs and thus provide SREs with additional optionality.
 
 [NVMESH-7068](https://jirasw.nvidia.com/browse/NVMESH-7068) \- Addition of a `toma_rpc` command to instruct the local TOMA to stop being the leader. This is done as follows:
+
 - `toma_rpc simulate reelect`
 
 [NVMESH-7072](https://jirasw.nvidia.com/browse/NVMESH-7072) \- Addition of a `toma_rpc` command to instruct the TOMAs to resend all volume statuses to management to resynchronize them. The command can also be limited to a specific volume. This is done as follows:
+
 - `toma_rpc simulate resend-praids-report all/<volume_name>`
 
 ## NVMesh Observability Enhancements
@@ -46,7 +49,7 @@ Some `/proc` additions and changes have been implemented as part of these enhanc
 
 ## REST API for Metadata Management
 
-Prior to NVMesh 3.4.0, it was possible to insert arbitrary fields in volume definitions through REST CRUD operations. This was not limited, so it was possible to collide with fields used by management itself. To make this more robust, only management fields are allowed in the base volume object hereon. User-defined fields can only be set within the volume's metadata section, [NVMESH-5320](https://jirasw.nvidia.com/browse/NVMESH-5320). 
+Prior to NVMesh 3.4.0, it was possible to insert arbitrary fields in volume definitions through REST CRUD operations. This was not limited, so it was possible to collide with fields used by management itself. To make this more robust, only management fields are allowed in the base volume object hereon. User-defined fields can only be set within the volume's metadata section, [NVMESH-5320](https://jirasw.nvidia.com/browse/NVMESH-5320).
 
 Volume metadata can also be managed via the CLI, [NVMESH-7010](https://jirasw.nvidia.com/browse/NVMESH-7010).
 
@@ -80,11 +83,11 @@ None.
 
 ### Bug Fixes
 
-[NVMESH-6750](https://jirasw.nvidia.com/browse/NVMESH-6750) \-  Reorganize shutdown process with configurable pre-shutdown delay.
+[NVMESH-6750](https://jirasw.nvidia.com/browse/NVMESH-6750) \- Reorganize shutdown process with configurable pre-shutdown delay.
 
 [NVMESH-6872](https://jirasw.nvidia.com/browse/NVMESH-6872) \- Update system packages and urllib3 for security fixes.
 
-[NVMESH-7590](https://jirasw.nvidia.com/browse/NVMESH-7590) \-  CSI v1.9.0 incorrectly addresses clients by their K8s node name.
+[NVMESH-7590](https://jirasw.nvidia.com/browse/NVMESH-7590) \- CSI v1.9.0 incorrectly addresses clients by their K8s node name.
 
 [NVMESH-7605](https://jirasw.nvidia.com/browse/NVMESH-7605) \- Parsing of the client's status.json output failed due to a change in a field's format leading to incorrect assertion of state.
 
@@ -92,22 +95,22 @@ Unticketed \- Fix a typo in a config field, `allowIncompatibleVersions`.
 
 ### Compatibility
 
-* NVMesh 2.7.2, 3.3.1, 3.3.2, 3.4.0
-* Kubernetes 1.22 \- 1.34
+- NVMesh 2.7.2, 3.3.1, 3.3.2, 3.4.0
+- Kubernetes 1.22 \- 1.34
 
 # CLI Changes
 
 ## Command Changes
 
-* **–description** added to **user** **create**/**update** and to **config-profile create**/**update** commands
+- **–description** added to **user** **create**/**update** and to **config-profile create**/**update** commands
 
 ## Alpha Features
 
 The following features are considered Alpha and not intended for use by end-users:
 
-* An alpha feature has been added enabling mass or bulk operations on objects using shell-style ranges such as “**volume create –name test-volumes-{prod,stage}-{0..100} …**”. The use case for this is primarily testing related. This should not be used for production operations.
+- An alpha feature has been added enabling mass or bulk operations on objects using shell-style ranges such as “**volume create –name test-volumes-{prod,stage}-{0..100} …**”. The use case for this is primarily testing related. This should not be used for production operations.
 
-* **upgrade-agent, upgrade, upgrade-step, component, release, platform** \- these are new commands related to NDU. These are partial implementations that are not qualified for production operations.
+- **upgrade-agent, upgrade, upgrade-step, component, release, platform** \- these are new commands related to NDU. These are partial implementations that are not qualified for production operations.
 
 # Resolved Issues
 
@@ -115,34 +118,35 @@ The following features are considered Alpha and not intended for use by end-user
 Template for new table entries
 | [NVMESH-](https://jirasw.nvidia.com/browse/NVMESH-) | | |
 -->
+
 | Ticket | Description | Comments |
-| :-----: | :---- | :---- |
-| [NVMESH-5138](https://jirasw.nvidia.com/browse/NVMESH-5138) | Bug fix for Grace CPU when the IOMMU is enabled. | |
-| [NVMESH-5412](https://jirasw.nvidia.com/browse/NVMESH-5412) | Improve performance for local drive operations.| |
-| [NVMESH-5956](https://jirasw.nvidia.com/browse/NVMESH-5956) | Improve cold recovery to handle additional error cases of media errors.| |
-| [NVMESH-6061](https://jirasw.nvidia.com/browse/NVMESH-6061) | Correct nvmesh-utils installation issue. | |
-| [NVMESH-6337](https://jirasw.nvidia.com/browse/NVMESH-6337) | Reload systemd daemon as part of RPM post-install. | |
-| [NVMESH-6338](https://jirasw.nvidia.com/browse/NVMESH-6338) | Error handling improvements to client service startup. | |
-| [NVMESH-6554](https://jirasw.nvidia.com/browse/NVMESH-6554) | TOMA networking did not handle an EWOULDBLOCK return from a call to sendto. | |
-| [NVMESH-6574](https://jirasw.nvidia.com/browse/NVMESH-6574) | Correct nvmesh_update kernel parsing. | |
-| [NVMESH-6712](https://jirasw.nvidia.com/browse/NVMESH-6712) <br> [NVMESH-6802](https://jirasw.nvidia.com/browse/NVMESH-6802) <br> [NVMESH-7253](https://jirasw.nvidia.com/browse/NVMESH-7253) | Improve handling of detaching of deleted volumes during restarts. | |
-| [NVMESH-6726](https://jirasw.nvidia.com/browse/NVMESH-6726) | Fix incorrect iostats latency units, off by 10x. | |
-| [NVMESH-6786](https://jirasw.nvidia.com/browse/NVMESH-6786) | Fix SoftiWarp race condition that causes a kernel crash. | |
-| [NVMESH-6788](https://jirasw.nvidia.com/browse/NVMESH-6788) | Fix a client crash when the IOMMU is enabled. | |
-| [NVMESH-6837](https://jirasw.nvidia.com/browse/NVMESH-6837) | Improve connectivity times upon IP address change. | |
-| [NVMESH-7022](https://jirasw.nvidia.com/browse/NVMESH-7022) | Avoid soft lockups and reduce the time to IO enabled when the IOMMU is enabled. | |
-| [NVMESH-7054](https://jirasw.nvidia.com/browse/NVMESH-7054) | Prevent kernel crash in SoftiWarp upon a multi-disaster scenario. | |
-| [NVMESH-7288](https://jirasw.nvidia.com/browse/NVMESH-7288) | Revert changes made that increased mNDU IO-disabled time. | |
-| [NVMESH-7313](https://jirasw.nvidia.com/browse/NVMESH-7313) | Reduce redundant SIW trace message, "Nothing to receive". | |
+| :-: | :-- | :-- |
+| [NVMESH-5138](https://jirasw.nvidia.com/browse/NVMESH-5138) | Bug fix for Grace CPU when the IOMMU is enabled. |  |
+| [NVMESH-5412](https://jirasw.nvidia.com/browse/NVMESH-5412) | Improve performance for local drive operations. |  |
+| [NVMESH-5956](https://jirasw.nvidia.com/browse/NVMESH-5956) | Improve cold recovery to handle additional error cases of media errors. |  |
+| [NVMESH-6061](https://jirasw.nvidia.com/browse/NVMESH-6061) | Correct nvmesh-utils installation issue. |  |
+| [NVMESH-6337](https://jirasw.nvidia.com/browse/NVMESH-6337) | Reload systemd daemon as part of RPM post-install. |  |
+| [NVMESH-6338](https://jirasw.nvidia.com/browse/NVMESH-6338) | Error handling improvements to client service startup. |  |
+| [NVMESH-6554](https://jirasw.nvidia.com/browse/NVMESH-6554) | TOMA networking did not handle an EWOULDBLOCK return from a call to sendto. |  |
+| [NVMESH-6574](https://jirasw.nvidia.com/browse/NVMESH-6574) | Correct nvmesh_update kernel parsing. |  |
+| [NVMESH-6712](https://jirasw.nvidia.com/browse/NVMESH-6712) <br> [NVMESH-6802](https://jirasw.nvidia.com/browse/NVMESH-6802) <br> [NVMESH-7253](https://jirasw.nvidia.com/browse/NVMESH-7253) | Improve handling of detaching of deleted volumes during restarts. |  |
+| [NVMESH-6726](https://jirasw.nvidia.com/browse/NVMESH-6726) | Fix incorrect iostats latency units, off by 10x. |  |
+| [NVMESH-6786](https://jirasw.nvidia.com/browse/NVMESH-6786) | Fix SoftiWarp race condition that causes a kernel crash. |  |
+| [NVMESH-6788](https://jirasw.nvidia.com/browse/NVMESH-6788) | Fix a client crash when the IOMMU is enabled. |  |
+| [NVMESH-6837](https://jirasw.nvidia.com/browse/NVMESH-6837) | Improve connectivity times upon IP address change. |  |
+| [NVMESH-7022](https://jirasw.nvidia.com/browse/NVMESH-7022) | Avoid soft lockups and reduce the time to IO enabled when the IOMMU is enabled. |  |
+| [NVMESH-7054](https://jirasw.nvidia.com/browse/NVMESH-7054) | Prevent kernel crash in SoftiWarp upon a multi-disaster scenario. |  |
+| [NVMESH-7288](https://jirasw.nvidia.com/browse/NVMESH-7288) | Revert changes made that increased mNDU IO-disabled time. |  |
+| [NVMESH-7313](https://jirasw.nvidia.com/browse/NVMESH-7313) | Reduce redundant SIW trace message, "Nothing to receive". |  |
 | [NVMESH-7772](https://jirasw.nvidia.com/browse/NVMESH-7772) | Fix crash due to race condition in the target. | The bug may have been introduced in the development of 3.4.0, so may be redundant to note it. |
 | [NVMESH-7778](https://jirasw.nvidia.com/browse/NVMESH-7778) | Improving handling of TCP_CLOSE in the SoftiWarp stack. | This improves error handling performance and IO disabled times when using SoftiWarp. |
-| [NVMESH-7797](https://jirasw.nvidia.com/browse/NVMESH-7797) | Improve TOMA network path selection for RAFT messages to increase robustness.| |
-| [NVMESH-](https://jirasw.nvidia.com/browse/NVMESH-) | | |
+| [NVMESH-7797](https://jirasw.nvidia.com/browse/NVMESH-7797) | Improve TOMA network path selection for RAFT messages to increase robustness. |  |
+| [NVMESH-](https://jirasw.nvidia.com/browse/NVMESH-) |  |  |
 
 # Known Issues
 
 | Ticket | Description | Workaround & Comments |
-| ----- | :---- | :---- |
+| --- | :-- | :-- |
 | [NVMESH-7214](https://jirasw.nvidia.com/browse/NVMESH-7214) | When performing mNDU from 3.3.2 to 3.4.0, the 3.3.2 management may still be accessible for a few minutes. | This could be considered as working as designed in practice. However, set the "Disable Old Management when in Upgrade Mode" to true before upgrading to avoid this. |
 | [NVMESH-7269](https://jirasw.nvidia.com/browse/NVMESH-7269) | The manual upgrade option appears as an option in the CLI, while in practice it will be rejected as an incorrect option by management. | The manual mode is not a product feature, rather used for debug. |
 | [NVMESH-7214](https://jirasw.nvidia.com/browse/NVMESH-7214) | When performing mNDU from 3.3.2 to 3.4.0, the 3.3.2 management may still be accessible for a few minutes. | This could be considered as working as designed in practice. However, set the "Disable Old Management when in Upgrade Mode" to true before upgrading to avoid this. |
@@ -156,7 +160,7 @@ Template for new table entries
 
 The updated NVMesh support matrix is available at [NVMesh Support Matrix](https://confluence.nvidia.com/display/NSV/NVMesh+Support+Matrix).
 
-**Note:** Kernels from 6.8.0 up until 6.14.6 suffer from a kernel workqueue crash in ​​cma\_netevent\_work\_handler, as described [here](https://bugzilla.redhat.com/show_bug.cgi?id=2363273). NVMesh is incompatible with these kernels ([NVMESH-6447](https://jirasw.nvidia.com/browse/NVMESH-6447)) as is. The NVMesh team has inserted a patched version of the relevant non-NVMesh kernel modules to fix this issue and make NVMesh compatible.
+**Note:** Kernels from 6.8.0 up until 6.14.6 suffer from a kernel workqueue crash in ​​cma_netevent_work_handler, as described [here](https://bugzilla.redhat.com/show_bug.cgi?id=2363273). NVMesh is incompatible with these kernels ([NVMESH-6447](https://jirasw.nvidia.com/browse/NVMESH-6447)) as is. The NVMesh team has inserted a patched version of the relevant non-NVMesh kernel modules to fix this issue and make NVMesh compatible.
 
 # Upgrade
 
@@ -164,11 +168,9 @@ Upgrading from this version to future versions will be best conducted using the 
 
 Upgrading from versions prior to NVMesh 3.2.0-HF2 is not possible. Upgrading from 3.2.0-HF2 is with a cold upgrade. From NVMesh 3.3.0 and onwards, it is recommended to perform upgrades using mNDU. For these versions, hot upgrade is supported.
 
-**Note:** For users running Ubuntu 22.04 and above, it is required to disable automatic service restarts during package upgrades. Ubuntu uses a utility called needrestart that may trigger an automatic restart of product services during an apt install or upgrade.
-To prevent this for our services, create the following configuration file on your Ubuntu nodes:
+**Note:** For users running Ubuntu 22.04 and above, it is required to disable automatic service restarts during package upgrades. Ubuntu uses a utility called needrestart that may trigger an automatic restart of product services during an apt install or upgrade. To prevent this for our services, create the following configuration file on your Ubuntu nodes:
 
 Path: /etc/needrestart/conf.d/needrestart_nvmesh.conf
 
-File Content:
-$nrconf{override_rc} ||= {};
-$nrconf{override_rc}->{qr(^nvmesh.*\.service$)} = 0;
+File Content: $nrconf{override_rc} ||= {};
+$nrconf{override_rc}->{qr(^nvmesh.\*\.service$)} = 0;
