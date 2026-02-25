@@ -68,22 +68,30 @@ In Ethernet multi-rail environments, many connection attempts will fail. Improve
 
 Drive formatting time on multi-drive servers is improved by performing multiple formats in parallel, [NVMESH-7337](https://jirasw.nvidia.com/browse/NVMESH-7337).
 
-## NVMesh CSI Driver Update, version 1.9.2
+## NVMesh CSI Driver Update, version 1.9.1
 
-This CSI Driver supports both this version of NVMesh upstream and the following earlier versions, NVMesh 2.7.2-HF16+, NVMesh 3.3.1-HF7+ and NVMesh 3.3.2-HF3+.
+This CSI Driver supports both this version of NVMesh and the following earlier versions: NVMesh 2.7.2-HF16+, NVMesh 3.3.1-HF7+ and NVMesh 3.3.2-HF3+.
 
 ### New Features
 
-[NVMESH-XXXX] \- TBD
+None.
 
 ### Bug Fixes
 
-[NVMESH-XXXX] \-  TBD
+[NVMESH-6750](https://jirasw.nvidia.com/browse/NVMESH-6750) \-  Reorganize shutdown process with configurable pre-shutdown delay.
+
+[NVMESH-6872](https://jirasw.nvidia.com/browse/NVMESH-6872) \- Update system packages and urllib3 for security fixes.
+
+[NVMESH-7590](https://jirasw.nvidia.com/browse/NVMESH-7590) \-  CSI v1.9.0 incorrectly addresses clients by their K8s node name.
+
+[NVMESH-7605](https://jirasw.nvidia.com/browse/NVMESH-7605) \- Parsing of the client's status.json output failed due to a change in a field's format leading to incorrect assertion of state.
+
+Unticketed \- Fix a typo in a config field, `allowIncompatibleVersions`.
 
 ### Compatibility
 
 * NVMesh 2.7.2, 3.3.1, 3.3.2, 3.4.0
-* (TBD) Kubernetes 1.22 \- 1.31
+* Kubernetes 1.22 \- 1.34
 
 # CLI Changes
 
