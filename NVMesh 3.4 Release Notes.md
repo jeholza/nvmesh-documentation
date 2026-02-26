@@ -1,4 +1,4 @@
-# NVMesh 3.4 Release Notes <img src="./rn-media/NVIDIA_logo.png" style="width: 18%; height: auto;" alt="The NVIDIA logo." />
+# NVMesh 3.4 Release Notes <img src="./rn-media/NVIDIA_logo.png" width="220" alt="The NVIDIA logo." />
 
 <!--
 SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
