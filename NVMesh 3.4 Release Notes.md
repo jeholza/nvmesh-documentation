@@ -121,38 +121,38 @@ Template for new table entries
 
 | Ticket | Description | Comments |
 | :-: | :-- | :-- |
-| [NVMESH-5138](https://jirasw.nvidia.com/browse/NVMESH-5138) | Bug fix for Grace CPU when the IOMMU is enabled. |  |
-| [NVMESH-5412](https://jirasw.nvidia.com/browse/NVMESH-5412) | Improve performance for local drive operations. |  |
-| [NVMESH-5956](https://jirasw.nvidia.com/browse/NVMESH-5956) | Improve cold recovery to handle additional error cases of media errors. |  |
-| [NVMESH-6061](https://jirasw.nvidia.com/browse/NVMESH-6061) | Correct nvmesh-utils installation issue. |  |
-| [NVMESH-6337](https://jirasw.nvidia.com/browse/NVMESH-6337) | Reload systemd daemon as part of RPM post-install. |  |
-| [NVMESH-6338](https://jirasw.nvidia.com/browse/NVMESH-6338) | Error handling improvements to client service startup. |  |
-| [NVMESH-6554](https://jirasw.nvidia.com/browse/NVMESH-6554) | TOMA networking did not handle an EWOULDBLOCK return from a call to sendto. |  |
-| [NVMESH-6574](https://jirasw.nvidia.com/browse/NVMESH-6574) | Correct nvmesh_update kernel parsing. |  |
-| [NVMESH-6712](https://jirasw.nvidia.com/browse/NVMESH-6712) <br> [NVMESH-6802](https://jirasw.nvidia.com/browse/NVMESH-6802) <br> [NVMESH-7253](https://jirasw.nvidia.com/browse/NVMESH-7253) | Improve handling of detaching of deleted volumes during restarts. |  |
-| [NVMESH-6726](https://jirasw.nvidia.com/browse/NVMESH-6726) | Fix incorrect iostats latency units, off by 10x. |  |
-| [NVMESH-6786](https://jirasw.nvidia.com/browse/NVMESH-6786) | Fix SoftiWarp race condition that causes a kernel crash. |  |
-| [NVMESH-6788](https://jirasw.nvidia.com/browse/NVMESH-6788) | Fix a client crash when the IOMMU is enabled. |  |
-| [NVMESH-6837](https://jirasw.nvidia.com/browse/NVMESH-6837) | Improve connectivity times upon IP address change. |  |
-| [NVMESH-7022](https://jirasw.nvidia.com/browse/NVMESH-7022) | Avoid soft lockups and reduce the time to IO enabled when the IOMMU is enabled. |  |
-| [NVMESH-7054](https://jirasw.nvidia.com/browse/NVMESH-7054) | Prevent kernel crash in SoftiWarp upon a multi-disaster scenario. |  |
-| [NVMESH-7288](https://jirasw.nvidia.com/browse/NVMESH-7288) | Revert changes made that increased mNDU IO-disabled time. |  |
-| [NVMESH-7313](https://jirasw.nvidia.com/browse/NVMESH-7313) | Reduce redundant SIW trace message, "Nothing to receive". |  |
-| [NVMESH-7772](https://jirasw.nvidia.com/browse/NVMESH-7772) | Fix crash due to race condition in the target. | The bug may have been introduced in the development of 3.4.0, so may be redundant to note it. |
-| [NVMESH-7778](https://jirasw.nvidia.com/browse/NVMESH-7778) | Improving handling of TCP_CLOSE in the SoftiWarp stack. | This improves error handling performance and IO disabled times when using SoftiWarp. |
-| [NVMESH-7797](https://jirasw.nvidia.com/browse/NVMESH-7797) | Improve TOMA network path selection for RAFT messages to increase robustness. |  |
-| [NVMESH-](https://jirasw.nvidia.com/browse/NVMESH-) |  |  |
+| <nobr>[NVMESH-5138](https://jirasw.nvidia.com/browse/NVMESH-5138)</nobr> | Bug fix for Grace CPU when the IOMMU is enabled. |  |
+| <nobr>[NVMESH-5412](https://jirasw.nvidia.com/browse/NVMESH-5412)</nobr> | Improve performance for local drive operations. |  |
+| <nobr>[NVMESH-5956](https://jirasw.nvidia.com/browse/NVMESH-5956)</nobr> | Improve cold recovery to handle additional error cases of media errors. |  |
+| <nobr>[NVMESH-6061](https://jirasw.nvidia.com/browse/NVMESH-6061)</nobr> | Correct nvmesh-utils installation issue. |  |
+| <nobr>[NVMESH-6337](https://jirasw.nvidia.com/browse/NVMESH-6337)</nobr> | Reload systemd daemon as part of RPM post-install. |  |
+| <nobr>[NVMESH-6338](https://jirasw.nvidia.com/browse/NVMESH-6338)</nobr> | Error handling improvements to client service startup. |  |
+| <nobr>[NVMESH-6554](https://jirasw.nvidia.com/browse/NVMESH-6554)</nobr> | TOMA networking did not handle an EWOULDBLOCK return from a call to sendto. |  |
+| <nobr>[NVMESH-6574](https://jirasw.nvidia.com/browse/NVMESH-6574)</nobr> | Correct nvmesh_update kernel parsing. |  |
+| <nobr>[NVMESH-6712](https://jirasw.nvidia.com/browse/NVMESH-6712)</nobr> <br> <nobr>[NVMESH-6802](https://jirasw.nvidia.com/browse/NVMESH-6802)</nobr> <br> <nobr>[NVMESH-7253](https://jirasw.nvidia.com/browse/NVMESH-7253)</nobr> | Improve handling of detaching of deleted volumes during restarts. |  |
+| <nobr>[NVMESH-6726](https://jirasw.nvidia.com/browse/NVMESH-6726)</nobr> | Fix incorrect iostats latency units, off by 10x. |  |
+| <nobr>[NVMESH-6786](https://jirasw.nvidia.com/browse/NVMESH-6786)</nobr> | Fix SoftiWarp race condition that causes a kernel crash. |  |
+| <nobr>[NVMESH-6788](https://jirasw.nvidia.com/browse/NVMESH-6788)</nobr> | Fix a client crash when the IOMMU is enabled. |  |
+| <nobr>[NVMESH-6837](https://jirasw.nvidia.com/browse/NVMESH-6837)</nobr> | Improve connectivity times upon IP address change. |  |
+| <nobr>[NVMESH-7022](https://jirasw.nvidia.com/browse/NVMESH-7022)</nobr> | Avoid soft lockups and reduce the time to IO enabled when the IOMMU is enabled. |  |
+| <nobr>[NVMESH-7054](https://jirasw.nvidia.com/browse/NVMESH-7054)</nobr> | Prevent kernel crash in SoftiWarp upon a multi-disaster scenario. |  |
+| <nobr>[NVMESH-7288](https://jirasw.nvidia.com/browse/NVMESH-7288)</nobr> | Revert changes made that increased mNDU IO-disabled time. |  |
+| <nobr>[NVMESH-7313](https://jirasw.nvidia.com/browse/NVMESH-7313)</nobr> | Reduce redundant SIW trace message, "Nothing to receive". |  |
+| <nobr>[NVMESH-7772](https://jirasw.nvidia.com/browse/NVMESH-7772)</nobr> | Fix crash due to race condition in the target. | The bug may have been introduced in the development of 3.4.0, so may be redundant to note it. |
+| <nobr>[NVMESH-7778](https://jirasw.nvidia.com/browse/NVMESH-7778)</nobr> | Improving handling of TCP_CLOSE in the SoftiWarp stack. | This improves error handling performance and IO disabled times when using SoftiWarp. |
+| <nobr>[NVMESH-7797](https://jirasw.nvidia.com/browse/NVMESH-7797)</nobr> | Improve TOMA network path selection for RAFT messages to increase robustness. |  |
+| <nobr>[NVMESH-](https://jirasw.nvidia.com/browse/NVMESH-)</nobr> |  |  |
 
 # Known Issues
 
 | Ticket | Description | Workaround & Comments |
 | --- | :-- | :-- |
-| [NVMESH-7214](https://jirasw.nvidia.com/browse/NVMESH-7214) | When performing mNDU from 3.3.2 to 3.4.0, the 3.3.2 management may still be accessible for a few minutes. | This could be considered as working as designed in practice. However, set the "Disable Old Management when in Upgrade Mode" to true before upgrading to avoid this. |
-| [NVMESH-7269](https://jirasw.nvidia.com/browse/NVMESH-7269) | The manual upgrade option appears as an option in the CLI, while in practice it will be rejected as an incorrect option by management. | The manual mode is not a product feature, rather used for debug. |
-| [NVMESH-7214](https://jirasw.nvidia.com/browse/NVMESH-7214) | When performing mNDU from 3.3.2 to 3.4.0, the 3.3.2 management may still be accessible for a few minutes. | This could be considered as working as designed in practice. However, set the "Disable Old Management when in Upgrade Mode" to true before upgrading to avoid this. |
-| [NVMESH-7676](https://jirasw.nvidia.com/browse/NVMESH-7676) | When performing mNDU from 3.3.2 to 3.4.0, a management with 3.3.2 that is coming up and running sanity checks may encounter a KAFKA error. | The management performing the mNDU will still continue the upgrade including the failed management. |
-| [NVMESH-7755](https://jirasw.nvidia.com/browse/NVMESH-7755) | When mNDU is performed on a client that is encrypting a volume, that volume may remain attached in limbo on the client, in the atom state indefinitely. | Reboot the node to clean the state. |
-| [NVMESH-7826](https://jirasw.nvidia.com/browse/NVMESH-7826) | On nodes with IOMMU enabled, with some kernels and with some drives, unbinding and then binding a drive to an NVMe driver, either the built-in kernel one or NVMesh's driver, may cause corrupt memory writes. | This behavior is not related to NVMesh directly. <br><br> Kernels such as the following exhibit this behavior: <ul style="padding-left: 24px;"><li>`5.15.0-164-generic`</li> <li>`5.19.0-50-generic`</li> <li>`6.2.0-25-generic`</li></ul> <br><br> Newer kernels such as the following do not exhibit this behavior: <ul style="padding-left: 24px;"><li>`6.5.0-25-generic`</li><li>`6.8.0-100-generic`</li></ul> <br><br> Using strict IOMMU, i.e., setting the kernel command line parameter `iommu.strict=1`, prevents this, but affects performance significantly and so is not recommended. |
+| <nobr>[NVMESH-7214](https://jirasw.nvidia.com/browse/NVMESH-7214)</nobr> | When performing mNDU from 3.3.2 to 3.4.0, the 3.3.2 management may still be accessible for a few minutes. | This could be considered as working as designed in practice. However, set the "Disable Old Management when in Upgrade Mode" to true before upgrading to avoid this. |
+| <nobr>[NVMESH-7269](https://jirasw.nvidia.com/browse/NVMESH-7269)</nobr> | The manual upgrade option appears as an option in the CLI, while in practice it will be rejected as an incorrect option by management. | The manual mode is not a product feature, rather used for debug. |
+| <nobr>[NVMESH-7214](https://jirasw.nvidia.com/browse/NVMESH-7214)</nobr> | When performing mNDU from 3.3.2 to 3.4.0, the 3.3.2 management may still be accessible for a few minutes. | This could be considered as working as designed in practice. However, set the "Disable Old Management when in Upgrade Mode" to true before upgrading to avoid this. |
+| <nobr>[NVMESH-7676](https://jirasw.nvidia.com/browse/NVMESH-7676)</nobr> | When performing mNDU from 3.3.2 to 3.4.0, a management with 3.3.2 that is coming up and running sanity checks may encounter a KAFKA error. | The management performing the mNDU will still continue the upgrade including the failed management. |
+| <nobr>[NVMESH-7755](https://jirasw.nvidia.com/browse/NVMESH-7755)</nobr> | When mNDU is performed on a client that is encrypting a volume, that volume may remain attached in limbo on the client, in the atom state indefinitely. | Reboot the node to clean the state. |
+| <nobr>[NVMESH-7826](https://jirasw.nvidia.com/browse/NVMESH-7826)</nobr> | On nodes with IOMMU enabled, with some kernels and with some drives, unbinding and then binding a drive to an NVMe driver, either the built-in kernel one or NVMesh's driver, may cause corrupt memory writes. | This behavior is not related to NVMesh directly. <br><br> Kernels such as the following exhibit this behavior: <ul style="padding-left: 24px;"><li>`5.15.0-164-generic`</li> <li>`5.19.0-50-generic`</li> <li>`6.2.0-25-generic`</li></ul> <br><br> Newer kernels such as the following do not exhibit this behavior: <ul style="padding-left: 24px;"><li>`6.5.0-25-generic`</li><li>`6.8.0-100-generic`</li></ul> <br><br> Using strict IOMMU, i.e., setting the kernel command line parameter `iommu.strict=1`, prevents this, but affects performance significantly and so is not recommended. |
 
 [Documentation Repository](https://gitlab-master.nvidia.com/excelero/nvmesh-documentation)
 
