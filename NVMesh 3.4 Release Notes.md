@@ -141,7 +141,6 @@ Template for new table entries
 | <nobr>[NVMESH‑7772](https://jirasw.nvidia.com/browse/NVMESH-7772)</nobr> | Fix crash due to race condition in the target. | The bug may have been introduced in the development of 3.4.0, so may be redundant to note it. |
 | <nobr>[NVMESH‑7778](https://jirasw.nvidia.com/browse/NVMESH-7778)</nobr> | Improving handling of TCP_CLOSE in the SoftiWarp stack. | This improves error handling performance and IO disabled times when using SoftiWarp. |
 | <nobr>[NVMESH‑7797](https://jirasw.nvidia.com/browse/NVMESH-7797)</nobr> | Improve TOMA network path selection for RAFT messages to increase robustness. |  |
-| <nobr>[NVMESH‑](https://jirasw.nvidia.com/browse/NVMESH-)</nobr> |  |  |
 
 # Known Issues
 
