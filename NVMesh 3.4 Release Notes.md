@@ -69,9 +69,17 @@ NVMesh 3.4.0 introduces new options for pinning IO of specific volumes to specif
 
 In Ethernet multi-rail environments, many connection attempts will fail. Improvements were made to reduce the affect this has during error situations so that reconnection and IO resumption is significantly faster, [NVMESH-7778](https://jirasw.nvidia.com/browse/NVMESH-7778).
 
-## Perform Improvement to Drive Formatting
+## Performance Improvement to Drive Formatting
 
 Drive formatting time on multi-drive servers is improved by performing multiple formats in parallel, [NVMESH-7337](https://jirasw.nvidia.com/browse/NVMESH-7337).
+
+## Monitoring Improvements
+
+[NVMESH-6578](https://jirasw.nvidia.com/browse/NVMESH-6578) \- Add /proc file for SERJIO status in JSON format.
+
+[NVMESH-7067](https://jirasw.nvidia.com/browse/NVMESH-7067) \- Add /proc file for active TOMA mTLS certificate inspection.
+
+[NVMESH-7696](https://jirasw.nvidia.com/browse/NVMESH-7696) \- Add /proc file for TOMA client subscribers count.
 
 ## NVMesh CSI Driver Update, version 1.9.1
 
@@ -125,8 +133,10 @@ Template for new table entries
 | <nobr>[NVMESH‑5412](https://jirasw.nvidia.com/browse/NVMESH-5412)</nobr> | Improve performance for local drive operations. |  |
 | <nobr>[NVMESH‑5956](https://jirasw.nvidia.com/browse/NVMESH-5956)</nobr> | Improve cold recovery to handle additional error cases of media errors. |  |
 | <nobr>[NVMESH‑6061](https://jirasw.nvidia.com/browse/NVMESH-6061)</nobr> | Correct nvmesh-utils installation issue. |  |
+| <nobr>[NVMESH‑6336](https://jirasw.nvidia.com/browse/NVMESH-6336)</nobr> | Fixed a bug that caused failures in drive formatting. | Affected Micron 6500 drives. |
 | <nobr>[NVMESH‑6337](https://jirasw.nvidia.com/browse/NVMESH-6337)</nobr> | Reload systemd daemon as part of RPM post-install. |  |
 | <nobr>[NVMESH‑6338](https://jirasw.nvidia.com/browse/NVMESH-6338)</nobr> | Error handling improvements to client service startup. |  |
+| <nobr>[NVMESH‑6395](https://jirasw.nvidia.com/browse/NVMESH-6395)</nobr> | Old traces deleted on upgrade. |  |
 | <nobr>[NVMESH‑6554](https://jirasw.nvidia.com/browse/NVMESH-6554)</nobr> | TOMA networking did not handle an EWOULDBLOCK return from a call to sendto. |  |
 | <nobr>[NVMESH‑6574](https://jirasw.nvidia.com/browse/NVMESH-6574)</nobr> | Correct nvmesh_update kernel parsing. |  |
 | <nobr>[NVMESH‑6712](https://jirasw.nvidia.com/browse/NVMESH-6712)</nobr> <br> <nobr>[NVMESH‑6802](https://jirasw.nvidia.com/browse/NVMESH-6802)</nobr> <br> <nobr>[NVMESH‑7253](https://jirasw.nvidia.com/browse/NVMESH-7253)</nobr> | Improve handling of detaching of deleted volumes during restarts. |  |
@@ -135,9 +145,14 @@ Template for new table entries
 | <nobr>[NVMESH‑6788](https://jirasw.nvidia.com/browse/NVMESH-6788)</nobr> | Fix a client crash when the IOMMU is enabled. |  |
 | <nobr>[NVMESH‑6837](https://jirasw.nvidia.com/browse/NVMESH-6837)</nobr> | Improve connectivity times upon IP address change. |  |
 | <nobr>[NVMESH‑7022](https://jirasw.nvidia.com/browse/NVMESH-7022)</nobr> | Avoid soft lockups and reduce the time to IO enabled when the IOMMU is enabled. |  |
+| <nobr>[NVMESH‑7038](https://jirasw.nvidia.com/browse/NVMESH-7038)</nobr> | Fix regression in volume encryption robustness under load. |  |
 | <nobr>[NVMESH‑7054](https://jirasw.nvidia.com/browse/NVMESH-7054)</nobr> | Prevent kernel crash in SoftiWarp upon a multi-disaster scenario. |  |
+| <nobr>[NVMESH‑7071](https://jirasw.nvidia.com/browse/NVMESH-7071)</nobr> | Improve recovery from Kafka certificate expiry and other Kafka issues to avoid Kafka message loss. |  |
+| <nobr>[NVMESH‑7198](https://jirasw.nvidia.com/browse/NVMESH-7198)</nobr> | Avoid having to do a TOMA leader restart to start some rebuilds after double drive eviction. |  |
+| <nobr>[NVMESH‑7226](https://jirasw.nvidia.com/browse/NVMESH-7226)</nobr> | Avoid TOMA crash on missing crt file. |  |
 | <nobr>[NVMESH‑7288](https://jirasw.nvidia.com/browse/NVMESH-7288)</nobr> | Revert changes made that increased mNDU IO-disabled time. |  |
 | <nobr>[NVMESH‑7313](https://jirasw.nvidia.com/browse/NVMESH-7313)</nobr> | Reduce redundant SIW trace message, "Nothing to receive". |  |
+| <nobr>[NVMESH‑7673](https://jirasw.nvidia.com/browse/NVMESH-7673)</nobr> | Fix rare crash in SIW kernel module. |  |
 | <nobr>[NVMESH‑7772](https://jirasw.nvidia.com/browse/NVMESH-7772)</nobr> | Fix crash due to race condition in the target. | The bug may have been introduced in the development of 3.4.0, so may be redundant to note it. |
 | <nobr>[NVMESH‑7778](https://jirasw.nvidia.com/browse/NVMESH-7778)</nobr> | Improving handling of TCP_CLOSE in the SoftiWarp stack. | This improves error handling performance and IO disabled times when using SoftiWarp. |
 | <nobr>[NVMESH‑7797](https://jirasw.nvidia.com/browse/NVMESH-7797)</nobr> | Improve TOMA network path selection for RAFT messages to increase robustness. |  |
@@ -167,6 +182,7 @@ Upgrading from this version to future versions will be best conducted using the 
 Upgrading from versions prior to NVMesh 3.2.0-HF2 is not possible. Upgrading from 3.2.0-HF2 is with a cold upgrade. From NVMesh 3.3.0 and onwards, it is recommended to perform upgrades using mNDU. For these versions, hot upgrade is supported.
 
 **<u>Note:</u>** [NVMESH-7874](https://jirasw.nvidia.com/browse/NVMESH-7874) - For Ubuntu 22.04 and above, it is required to disable automatic service restarts during package upgrades. Ubuntu uses a utility called `needrestart` that may trigger an automatic restart of NVMesh services during an `apt install` or `apt upgrade`. To prevent this for the NVMesh services, create the a configuration file named `/etc/needrestart/conf.d/needrestart_nvmesh.conf` with the following contents:
+
 ```
 $nrconf{override_rc} ||= {};
 $nrconf{override_rc}->{qr(^nvmesh.\*\.service$)} = 0;
