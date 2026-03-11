@@ -249,8 +249,11 @@ Tracer severities are defined by these values:
 | `debug_level` | Enables debug logging (to the system log not NVMesh tracer) if set above 1. | `int` | writable (`0644`) | `(int)1` |
 | `ib_cross_subnet` | Enable cross subnet, IB transport | `bool` | writable (`0644`) | `false` |
 | `intr_shaper_max_burst` | Defines the maximum number of recv completions to handle in an interrupt before entering poll mode. | `uint` | writable (`0644`) | `(64)` |
+| `intr_shaper_max_burst_tcp` | Same as intr_shaper_max_burst, but used when tcp_mode != 0. | `uint` | writable (`0644`) | `(64)` |
 | `intr_shaper_max_irq_time_usecs` | Defines the maximum time to spend in an interrupt before entering poll mode. | `uint` | writable (`0644`) | `(2000)` |
+| `intr_shaper_max_irq_time_usecs_tcp` | Same as intr_shaper_max_irq_time_usecs, but used when tcp_mode != 0. | `uint` | writable (`0644`) | `(2000)` |
 | `intr_shaper_max_pct_cpu` | Defines the maximum percentage of CPU time to spend processing completions in an interrupt before entering poll mode. | `uint` | writable (`0644`) | `(20)` |
+| `intr_shaper_max_pct_cpu_tcp` | Same as intr_shaper_max_pct_cpu, but used when tcp_mode != 0. | `uint` | writable (`0644`) | `(4)` |
 | `ipv6_mode` | IPv6 Mode: 0 - No IPv6, 1 - IPv6 enabled, prefer IPv4 addresses, 2 - IPv6 enabled and preferred, 3 - IPv6 Only | `uint` | writable (`0644`) | `1` |
 | `iwarp_cm_inv_time_sec` | Timeout for iWARP CM Invalidate (in seconds | `uint` | writable (`0644`) | `30` |
 | `iwarp_find_path_sock` | Use a socket for iwarp_find_path. Reduces load on siw_cm_wq | `bool` | writable (`0644`) | `true` |
@@ -276,6 +279,7 @@ Tracer severities are defined by these values:
 | `qp_retry_cnt` | QP retry count | `uint` | writable (`0644`) | `7` |
 | `qp_timeout` | QP timeout (4.096 x 2^N) us | `uint` | writable (`0644`) | `14` |
 | `tcp_base_port_id` | The first (base) port ID for secondary SIW (iWARP) listeners. | `uint` | read-only (`0444`) | `7915` |
+| `tcp_mode` | Is TCP mode enabled? 0 = no, 1 = yes | `uint` | read-only (`0444`) | `0` |
 | `tcp_num_ports` | The number of secondary SIW (iWARP) TCP ports. 0 = number of CPUs. | `uint` | read-only (`0444`) | `16` |
 | `tracer_debug_level` | This determines the level of tracing for this module. Only traces with this level or lower will be issued, see tracer severities above. | `int` | writable (`0644`) | `3` |
 
@@ -302,6 +306,7 @@ Tracer severities are defined by these values:
 | `debug_level` | Enables debug logging (to the system log not NVMesh tracer) if set above 1. Deprecated. | `int` | writable (`0644`) | `1` |
 | `defer_process_io_cq` | Defer all IO completions to a per completion queue thread, so it is not done in the interrupt context. | `bool` | writable (`0644`) | `false` |
 | `defer_recv_comps` | Defer handling of IO receive completions, so it is not done in the interrupt context. | `bool` | writable (`0644`) | `true` |
+| `defer_recv_comps_tcp` | Same as defer_recv_comps, but applied for TCP/SIW NICs. | `bool` | writable (`0644`) | `false` |
 | `disk_collect_stats` | Enable collecting statistics for disk operations. Can be used for performance optimization. | `bool` | writable (`0644`) | `true` |
 | `distr_intr_program` | Path to the interrupt distribution program | `string` | writable (`0600`) | `"/opt/nvmesh/common-repo/scripts/" "/nvmesh_set_irq_affinity"` |
 | `dummy_id` | Serial ID to be used for drives on drive-less targets. Dummy drives are rarely needed, only for an arbiter on a 2-node system. | `charp` | read-only (`0444`) | `NULL` |
@@ -365,6 +370,7 @@ Tracer severities are defined by these values:
 | `tcp_port_prio` | Defines the priority of SIW. Enables overriding the form of network transportation to prefer. See ib_port_prio and roce_port_prio also. | `uint` | writable (`0644`) | `20` |
 | `tracer_debug_level` | This determines the level of tracing for this module. Only traces with this level or lower will be issued, see tracer severities above. | `int` | writable (`0644`) | `4` |
 | `use_intr_shaper` | Determines whether to use an interrupt shaper for NVMe completions. | `bool` | writable (`0644`) | `true` |
+| `use_intr_shaper_tcp` | Same as use_intr_shaper, but applied when running in TCP-only mode. | `bool` | writable (`0644`) | `false` |
 | `use_nvme_kwq` | Determines whether to use a kernel workqueue instead of a wakeup thread for processing completion queues. | `bool` | read-only (`0444`) | `false` |
 | `use_pcpu_cq` | Use a per-cpu shared completion queue (SCQ) and shared receive queue (SRQ). | `bool` | read-only (`0444`) | `false` |
 
