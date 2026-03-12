@@ -167,13 +167,19 @@ Template for new table entries
 | <nobr>[NVMESH‑7755](https://jirasw.nvidia.com/browse/NVMESH-7755)</nobr> | When mNDU is performed on a client that is encrypting a volume, that volume may remain attached in limbo on the client, in the atom state indefinitely. | Reboot the node to clean the state. |
 | <nobr>[NVMESH‑7826](https://jirasw.nvidia.com/browse/NVMESH-7826)</nobr> | On nodes with IOMMU enabled, with some kernels and with some drives, unbinding and then binding a drive to an NVMe driver, either the built-in kernel one or NVMesh's driver, may cause corrupt memory writes. | This behavior is not related to NVMesh directly. <br><br> Kernels such as the following exhibit this behavior: <ul style="padding-left: 24px;"><li>`5.15.0-164-generic`</li> <li>`5.19.0-50-generic`</li> <li>`6.2.0-25-generic`</li></ul> <br><br> Newer kernels such as the following do not exhibit this behavior: <ul style="padding-left: 24px;"><li>`6.5.0-25-generic`</li><li>`6.8.0-100-generic`</li></ul> <br><br> Using strict IOMMU, i.e., setting the kernel command line parameter `iommu.strict=1`, prevents this, but affects performance significantly and so is not recommended. |
 
+# Documentation
+
 [Documentation Repository](https://gitlab-master.nvidia.com/excelero/nvmesh-documentation)
 
-# Support Matrix Update
+## Support Matrix Update
 
 The updated NVMesh support matrix is available at [NVMesh Support Matrix](https://confluence.nvidia.com/display/NSV/NVMesh+Support+Matrix).
 
 **<u>Note:</u>** Kernels from 6.8.0 up until 6.14.6 suffer from a kernel workqueue crash in ​​cma_netevent_work_handler, as described [here](https://bugzilla.redhat.com/show_bug.cgi?id=2363273). NVMesh is incompatible with these kernels ([NVMESH-6447](https://jirasw.nvidia.com/browse/NVMESH-6447)) as is. The NVMesh team has inserted a patched version of the relevant non-NVMesh kernel modules to fix this issue and make NVMesh compatible.
+
+# Pre-built Packages
+
+All NVMesh 3.4.0 packages can be found in NVIDIA's artifactory [here](https://urm.nvidia.com/artifactory/sw-ngc-nvmesh-generic-local/3.4.0).
 
 # Upgrade
 
