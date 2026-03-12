@@ -11,7 +11,7 @@ SPDX-License-Identifier: Apache-2.0
 
 | Version |          Date           | Release | Soul                           |
 | :-----: | :---------------------: | :-----: | ------------------------------ |
-|   1.0   | <nobr>2025-02-26</nobr> |  3.4.0  | First release of NVMesh 3.4.0. |
+|   1.0   | <nobr>2026-03-12</nobr> |  3.4.0  | First release of NVMesh 3.4.0. |
 
 # General
 
