@@ -5,8 +5,6 @@ SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All 
 SPDX-License-Identifier: Apache-2.0
 -->
 
-**For internal distribution only.**
-
 # Change log
 
 | Version |          Date           | Release | Soul                           |
