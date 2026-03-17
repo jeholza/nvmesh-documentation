@@ -323,7 +323,7 @@ _Show instances_
 | `-l`, `--limit` | integer |  | Page limit (0 is unlimited) |  |  |
 | `-s`, `--skip` | integer |  |  |  | 0 |
 | `-1`, `--onepage` | flag |  | Print one page and stop - no prompt |  |  |
-| `-f`, `--fields` | text |  | Comma seperated fields to show (besides ID/Name) - case insensitive, use "-" for space |  |  |
+| `-f`, `--fields` | text |  | Comma separated fields to show (besides ID/Name) - case insensitive, use "-" for space |  |  |
 
 #### client wait
 
@@ -354,7 +354,7 @@ _Show instances_
 | `-l`, `--limit` | integer |  | Page limit (0 is unlimited) |  |  |
 | `-s`, `--skip` | integer |  |  |  | 0 |
 | `-1`, `--onepage` | flag |  | Print one page and stop - no prompt |  |  |
-| `-f`, `--fields` | text |  | Comma seperated fields to show (besides ID/Name) - case insensitive, use "-" for space |  |  |
+| `-f`, `--fields` | text |  | Comma separated fields to show (besides ID/Name) - case insensitive, use "-" for space |  |  |
 
 #### cluster update-cluster-id
 
@@ -412,7 +412,7 @@ _Show instances_
 | `-l`, `--limit` | integer |  | Page limit (0 is unlimited) |  |  |
 | `-s`, `--skip` | integer |  |  |  | 0 |
 | `-1`, `--onepage` | flag |  | Print one page and stop - no prompt |  |  |
-| `-f`, `--fields` | text |  | Comma seperated fields to show (besides ID/Name) - case insensitive, use "-" for space |  |  |
+| `-f`, `--fields` | text |  | Comma separated fields to show (besides ID/Name) - case insensitive, use "-" for space |  |  |
 
 #### config-profile update
 
@@ -490,7 +490,7 @@ _Show instances_
 | `-l`, `--limit` | integer |  | Page limit (0 is unlimited) |  |  |
 | `-s`, `--skip` | integer |  |  |  | 0 |
 | `-1`, `--onepage` | flag |  | Print one page and stop - no prompt |  |  |
-| `-f`, `--fields` | text |  | Comma seperated fields to show (besides ID/Name) - case insensitive, use "-" for space |  |  |
+| `-f`, `--fields` | text |  | Comma separated fields to show (besides ID/Name) - case insensitive, use "-" for space |  |  |
 
 #### drive wait
 
@@ -546,7 +546,7 @@ _Show instances_
 | `-l`, `--limit` | integer |  | Page limit (0 is unlimited) |  |  |
 | `-s`, `--skip` | integer |  |  |  | 0 |
 | `-1`, `--onepage` | flag |  | Print one page and stop - no prompt |  |  |
-| `-f`, `--fields` | text |  | Comma seperated fields to show (besides ID/Name) - case insensitive, use "-" for space |  |  |
+| `-f`, `--fields` | text |  | Comma separated fields to show (besides ID/Name) - case insensitive, use "-" for space |  |  |
 
 #### drive-class update
 
@@ -586,7 +586,7 @@ _Show instances_
 | `-l`, `--limit` | integer |  | Page limit (0 is unlimited) |  |  |
 | `-s`, `--skip` | integer |  |  |  | 0 |
 | `-1`, `--onepage` | flag |  | Print one page and stop - no prompt |  |  |
-| `-f`, `--fields` | text |  | Comma seperated fields to show (besides ID/Name) - case insensitive, use "-" for space |  |  |
+| `-f`, `--fields` | text |  | Comma separated fields to show (besides ID/Name) - case insensitive, use "-" for space |  |  |
 
 #### general-settings update
 
@@ -660,7 +660,7 @@ _Show instances_
 | `-l`, `--limit` | integer |  | Page limit (0 is unlimited) |  |  |
 | `-s`, `--skip` | integer |  |  |  | 0 |
 | `-1`, `--onepage` | flag |  | Print one page and stop - no prompt |  |  |
-| `-f`, `--fields` | text |  | Comma seperated fields to show (besides ID/Name) - case insensitive, use "-" for space |  |  |
+| `-f`, `--fields` | text |  | Comma separated fields to show (besides ID/Name) - case insensitive, use "-" for space |  |  |
 
 #### key-pair update
 
@@ -708,7 +708,7 @@ _Show instances_
 | `-l`, `--limit` | integer |  | Page limit (0 is unlimited) |  |  |
 | `-s`, `--skip` | integer |  |  |  | 0 |
 | `-1`, `--onepage` | flag |  | Print one page and stop - no prompt |  |  |
-| `-f`, `--fields` | text |  | Comma seperated fields to show (besides ID/Name) - case insensitive, use "-" for space |  |  |
+| `-f`, `--fields` | text |  | Comma separated fields to show (besides ID/Name) - case insensitive, use "-" for space |  |  |
 | `-a`, `--alerts` | flag |  | Only show alerts |  |  |
 
 ---
@@ -747,7 +747,7 @@ _Show instances_
 | `-l`, `--limit` | integer |  | Page limit (0 is unlimited) |  |  |
 | `-s`, `--skip` | integer |  |  |  | 0 |
 | `-1`, `--onepage` | flag |  | Print one page and stop - no prompt |  |  |
-| `-f`, `--fields` | text |  | Comma seperated fields to show (besides ID/Name) - case insensitive, use "-" for space |  |  |
+| `-f`, `--fields` | text |  | Comma separated fields to show (besides ID/Name) - case insensitive, use "-" for space |  |  |
 
 #### management status
 
@@ -756,7 +756,7 @@ _Show HA status_
 | Argument | Type | Required | Description | Choices | Default |
 |----------|------|----------|-------------|---------|---------|
 | `-o`, `--output-format` | choice |  |  | `tabular`, `rows`, `json`, `list` |  |
-| `-f`, `--fields` | text |  | Comma seperated fields to show - case insensitive, use "-" for space |  |  |
+| `-f`, `--fields` | text |  | Comma separated fields to show - case insensitive, use "-" for space |  |  |
 
 ---
 
@@ -809,7 +809,7 @@ _Show instances_
 | `-l`, `--limit` | integer |  | Page limit (0 is unlimited) |  |  |
 | `-s`, `--skip` | integer |  |  |  | 0 |
 | `-1`, `--onepage` | flag |  | Print one page and stop - no prompt |  |  |
-| `-f`, `--fields` | text |  | Comma seperated fields to show (besides ID/Name) - case insensitive, use "-" for space |  |  |
+| `-f`, `--fields` | text |  | Comma separated fields to show (besides ID/Name) - case insensitive, use "-" for space |  |  |
 
 #### target wait
 
@@ -865,7 +865,7 @@ _Show instances_
 | `-l`, `--limit` | integer |  | Page limit (0 is unlimited) |  |  |
 | `-s`, `--skip` | integer |  |  |  | 0 |
 | `-1`, `--onepage` | flag |  | Print one page and stop - no prompt |  |  |
-| `-f`, `--fields` | text |  | Comma seperated fields to show (besides ID/Name) - case insensitive, use "-" for space |  |  |
+| `-f`, `--fields` | text |  | Comma separated fields to show (besides ID/Name) - case insensitive, use "-" for space |  |  |
 
 #### target-class update
 
@@ -931,7 +931,7 @@ _Show instances_
 | `-l`, `--limit` | integer |  | Page limit (0 is unlimited) |  |  |
 | `-s`, `--skip` | integer |  |  |  | 0 |
 | `-1`, `--onepage` | flag |  | Print one page and stop - no prompt |  |  |
-| `-f`, `--fields` | text |  | Comma seperated fields to show (besides ID/Name) - case insensitive, use "-" for space |  |  |
+| `-f`, `--fields` | text |  | Comma separated fields to show (besides ID/Name) - case insensitive, use "-" for space |  |  |
 
 #### upgrade skip-failed-machine
 
@@ -976,7 +976,7 @@ _Show instances_
 | `-l`, `--limit` | integer |  | Page limit (0 is unlimited) |  |  |
 | `-s`, `--skip` | integer |  |  |  | 0 |
 | `-1`, `--onepage` | flag |  | Print one page and stop - no prompt |  |  |
-| `-f`, `--fields` | text |  | Comma seperated fields to show (besides ID/Name) - case insensitive, use "-" for space |  |  |
+| `-f`, `--fields` | text |  | Comma separated fields to show (besides ID/Name) - case insensitive, use "-" for space |  |  |
 
 ---
 
@@ -1014,7 +1014,7 @@ _Show instances_
 | `-l`, `--limit` | integer |  | Page limit (0 is unlimited) |  |  |
 | `-s`, `--skip` | integer |  |  |  | 0 |
 | `-1`, `--onepage` | flag |  | Print one page and stop - no prompt |  |  |
-| `-f`, `--fields` | text |  | Comma seperated fields to show (besides ID/Name) - case insensitive, use "-" for space |  |  |
+| `-f`, `--fields` | text |  | Comma separated fields to show (besides ID/Name) - case insensitive, use "-" for space |  |  |
 
 ---
 
@@ -1066,7 +1066,7 @@ _Show instances_
 | `-l`, `--limit` | integer |  | Page limit (0 is unlimited) |  |  |
 | `-s`, `--skip` | integer |  |  |  | 0 |
 | `-1`, `--onepage` | flag |  | Print one page and stop - no prompt |  |  |
-| `-f`, `--fields` | text |  | Comma seperated fields to show (besides ID/Name) - case insensitive, use "-" for space |  |  |
+| `-f`, `--fields` | text |  | Comma separated fields to show (besides ID/Name) - case insensitive, use "-" for space |  |  |
 
 #### user update
 
@@ -1224,7 +1224,7 @@ _Show instances_
 | `-l`, `--limit` | integer |  | Page limit (0 is unlimited) |  |  |
 | `-s`, `--skip` | integer |  |  |  | 0 |
 | `-1`, `--onepage` | flag |  | Print one page and stop - no prompt |  |  |
-| `-f`, `--fields` | text |  | Comma seperated fields to show (besides ID/Name) - case insensitive, use "-" for space |  |  |
+| `-f`, `--fields` | text |  | Comma separated fields to show (besides ID/Name) - case insensitive, use "-" for space |  |  |
 
 #### volume update
 
@@ -1309,7 +1309,7 @@ _Show instances_
 | `-l`, `--limit` | integer |  | Page limit (0 is unlimited) |  |  |
 | `-s`, `--skip` | integer |  |  |  | 0 |
 | `-1`, `--onepage` | flag |  | Print one page and stop - no prompt |  |  |
-| `-f`, `--fields` | text |  | Comma seperated fields to show (besides ID/Name) - case insensitive, use "-" for space |  |  |
+| `-f`, `--fields` | text |  | Comma separated fields to show (besides ID/Name) - case insensitive, use "-" for space |  |  |
 
 #### volume-security-group update
 
@@ -1389,7 +1389,7 @@ _Show instances_
 | `-l`, `--limit` | integer |  | Page limit (0 is unlimited) |  |  |
 | `-s`, `--skip` | integer |  |  |  | 0 |
 | `-1`, `--onepage` | flag |  | Print one page and stop - no prompt |  |  |
-| `-f`, `--fields` | text |  | Comma seperated fields to show (besides ID/Name) - case insensitive, use "-" for space |  |  |
+| `-f`, `--fields` | text |  | Comma separated fields to show (besides ID/Name) - case insensitive, use "-" for space |  |  |
 
 #### vpg update
 
