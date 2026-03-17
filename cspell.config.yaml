@@ -240,3 +240,14 @@ words:
 	- YNAAH
 	- zcopy
 	- ullong
+	- ecseparationtype
+	- HOTPLUG
+	- logginglevel
+	- notificationlevel
+	- onepage
+	- raidlevel
+	- relogin
+	- Relogin
+	- upgradeexecutionmodes
+	- upgraderedundancylevels
+	- vsgs
