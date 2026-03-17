@@ -112,7 +112,7 @@ Tracer severities are defined by these values:
 | `goodpath_syncs_debug_level` | This determines the level of tracing for data path syncs. Only traces with this level or lower will be issued, see tracer severities above. | `int` | writable (`0644`) | `if defined(NVMESH_IS_PRODUCTION_COMPILATION) && (NVMESH_IS_PRODUCTION_COMPILATION==1) then 0; otherwise 4` |
 | `goodpath_transport_debug_level` | This determines the level of tracing for the regular data path networking. Only traces with this level or lower will be issued, see tracer severities above. | `int` | writable (`0644`) | `1` |
 | `guids` | Used for port filtering functionality. Typically populated from nvmesh.conf parameters. | `string` | writable (`0644`) | `""` |
-| `ib_net_complete_iocmd_use_pcpu_wq` | Deteremines whether IB net complete iocmd use per-cpu workqeueus for request handling. | `bool` | read-only (`0444`) | `false` |
+| `ib_net_complete_iocmd_use_pcpu_wq` | Determines whether IB net complete iocmd use per-cpu workqueues for request handling. | `bool` | read-only (`0444`) | `false` |
 | `io_max_retry_encrypted_secs` | Encrypted volume max time to try and execute IO before failing it to OS [sec], if 0, use system's default | `uint` | writable (`0644`) | `300` |
 | `io_max_retry_secs` | Max time to try and execute IO before failing it to OS [sec], if 0, use system's default | `uint` | writable (`0644`) | `0` |
 | `ioch_ka_only_no_rdda` | Use only IO channels for IO keep alive messages, requires disk discovery to take effect. | `bool` | writable (`0644`) | `1` |
@@ -217,7 +217,7 @@ Tracer severities are defined by these values:
 | `sm_th` | Maximum number of concurrent Infiniband subnet manager requests. Used for throttling subnet manager access. | `uint` | writable (`0644`) | `32` |
 | `tcp_mode` | Activate the SIW communicate mode exclusively, i.e., filter out any RoCE devices. Usually set by service startup from nvmesh.conf information. | `uint` | read-only (`0444`) | `0` |
 | `tgt_nics_query_min_fail_secs` | Minimum number of seconds of discovery failures before sending a Target NICs query to management | `uint` | writable (`0644`) | `10` |
-| `tgt_nics_query_min_n_fail` | The mnimum number of discovery failures before sending a Target NICs query to management. | `uint` | writable (`0644`) | `UINT_MAX` |
+| `tgt_nics_query_min_n_fail` | The minimum number of discovery failures before sending a Target NICs query to management. | `uint` | writable (`0644`) | `UINT_MAX` |
 | `tgt_nics_query_min_secs` | The minimum amount of time allowed between Target NICs query to management. | `uint` | writable (`0644`) | `2` |
 | `timer_cpu` | CPU to run timer on (-1=same as main, >=0 explicit) | `int` | writable (`0644`) | `1` |
 | `timer_fire_us` | Timer fire interval in us (RDMA high-load: 50-200) | `uint` | writable (`0644`) | `100` |
