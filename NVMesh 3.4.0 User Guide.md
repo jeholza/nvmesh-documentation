@@ -1978,7 +1978,7 @@ apt-get install -y nvmesh-management nvmesh-utils
 
 Upon successful installation, Management will be set to automatically start at boot time. Deploying for HA is covered as an advanced topic in the [Management Scalability](#management-scalability) section.
 
-After package installation, review the file, `/etc/opt/NVMesh/management.js.conf`, for installation specific setting changes required. Details on this options available for this configuration file can be found in [Management Options](#management-options).
+After package installation, review the file, `/etc/nvmesh/management.js.conf`, for installation specific setting changes required. Details on this options available for this configuration file can be found in [Management Options](#management-options).
 
 Once configured, start the service:
 
@@ -2869,18 +2869,18 @@ Zeroing behavior is governed by three parameters set directly on targets using t
 To alter the zeroing behavior defined, run commands such as in the following example that sets the current default values, which are to TRIM without verifying that the blocks are later read as zeroes.
 
 ```bash
-/opt/NVMesh/common-repo/tools/toma_rpc disk-models default is_using_nvme_trim_before_zero on
+/opt/nvmesh/common-repo/tools/toma_rpc disk-models default is_using_nvme_trim_before_zero on
 
-/opt/NVMesh/common-repo/tools/toma_rpc disk-models default is_zeroing_using_test_and_write off
+/opt/nvmesh/common-repo/tools/toma_rpc disk-models default is_zeroing_using_test_and_write off
 
-/opt/NVMesh/common-repo/tools/toma_rpc disk-models default is_zeroing_mandatory off
+/opt/nvmesh/common-repo/tools/toma_rpc disk-models default is_zeroing_mandatory off
 ```
 
 - `is_using_nvme_trim_before_zero` governs whether to use TRIM operations as a means of zeroing.
 - `is_zeroing_using_test_and_write` governs whether to read and write zeros as a means of zeroing.
 - `is_zeroing_mandatory` can be used to stop all explicit zeroing.
 
-These settings can be set as a default for all drives or using commands for specific drive models. Use `/opt/NVMesh/common-repo/tools/toma_rpc disk-models list` to see the current definitions including built-in non-default behavior to handle some known drive model quirks.
+These settings can be set as a default for all drives or using commands for specific drive models. Use `/opt/nvmesh/common-repo/tools/toma_rpc disk-models list` to see the current definitions including built-in non-default behavior to handle some known drive model quirks.
 
 ## Volume Rebuild Prioritization
 
@@ -2904,7 +2904,7 @@ The "toma_rpc" tool is the TOMA’s "swiss-knife" providing a variety of knobs f
 
 **<u>Note:</u>** There is a long-term plan to move the tuning functionality into management.
 
-The toma_rpc tool is not placed in a one of the directories commonly searched for executables by default in commonly used shells, so unless special steps are taken the full path will be needed to invoke the tool, i.e., `/opt/NVMesh/common-repo/tools/toma_rpc`. For convenience, hereon toma_rpc will be used to imply the full path.
+The toma_rpc tool is not placed in a one of the directories commonly searched for executables by default in commonly used shells, so unless special steps are taken the full path will be needed to invoke the tool, i.e., `/opt/nvmesh/common-repo/tools/toma_rpc`. For convenience, hereon toma_rpc will be used to imply the full path.
 
 The following sections describe the higher-level options. Each section has a help option with more information. Invoking `toma_rpc help` can provide this information as well.
 
@@ -4282,7 +4282,7 @@ Sep 5 14:35:44 server1 nvmeshmgr[11107]: WARNING: Unable to verify managementId,
 
 To update the management server ID, create the file that indicates to the management that it should update its ID.
 
-A simple means is to run the following as root: `touch /var/opt/NVMesh/mgr/update_management_id`.
+A simple means is to run the following as root: `touch /var/opt/nvmesh/mgr/update_management_id`.
 
 The Management should then proceed to start. There is no need to stop any services for this operation.
 
@@ -4294,9 +4294,9 @@ To reset the cluster to a clean configuration, perform the following actions:
 
 1. Stop the cluster, see shutting down NVMesh above.
 2. On Management Servers, run `mongosh management --eval 'db.dropDatabase()'`. This will delete all volume configurations and product history. Additional parameters may be needed depending upon the security mechanisms applied to mongo.
-   1. On targets, as root, run: `rm -rf /var/opt/NVMesh/toma/\*`.
+   1. On targets, as root, run: `rm -rf /var/opt/nvmesh/toma/\*`.
    2. This will delete all volume state information on the targets.
-3. On clients, as root, run: `rm /var/opt/NVMesh/mcs/CLIENT/CONFIGURATION`.
+3. On clients, as root, run: `rm /var/opt/nvmesh/mcs/CLIENT/CONFIGURATION`.
 4. Start the cluster, see starting NVMesh above.
 
 ### Rename hostname
