@@ -102,6 +102,9 @@ SPDX-License-Identifier: Apache-2.0
   - [Network Configuration](#network-configuration)
     - [RoCEv2 Multi-pathing](#rocev2-multi-pathing)
     - [SoftiWarp / TCP-IP](#softiwarp--tcp-ip)
+    - [TCP performance tuning](#tcp-performance-tuning)
+      - [Flow steering, RSS, and multi-port listeners](#flow-steering-rss-and-multi-port-listeners)
+      - [Latency versus throughput](#latency-versus-throughput)
   - [Software Delivery](#software-delivery)
     - [NVMesh Packages](#nvmesh-packages)
     - [Software Delivery for Red Hat Distributions](#software-delivery-for-red-hat-distributions)
@@ -1424,6 +1427,89 @@ To disable RDMA and use only TCP/IP, set `TCP_ONLY="Yes"` in the same conf file.
 Targets will listen for incoming connections for both RDMA and TCP for NICs for which RoCE and TCP has been enabled, and the TCP_ONLY setting is not in place. Clients will prefer RoCE and will not fallback to TCP.
 
 **<u>Note:</u>** IPv6 is not supported in this version.
+
+### TCP performance tuning
+
+NVMesh ships with **conservative defaults** that prioritize broad compatibility and stable behavior across many hardware and workload combinations. Those defaults are **not tuned for a specific topology** (for example, a particular core count, NUMA layout, or number of NICs). For SoftiWarp (SIW) over TCP, peak throughput and latency usually require aligning **network receive steering**, **SoftiWarp transmit threading**, and **NVMesh completion-queue vector selection** with your CPUs and NIC placement.
+
+The following areas are the main levers. Validate changes with your workload; incorrect affinity can reduce performance or increase latency.
+
+#### `nvmesh.conf` and the TCP affinity script
+
+When TCP/SIW is enabled, NVMesh can run `nvmesh_set_tcp_affinity` at service start to configure receive-side steering (RSS-related queues, RPS, optional flow steering, and IRQ affinity) for each SIW interface. This is controlled globally by **`TCP_SET_AFFINITY`**: set to `No` or `False` to skip the script entirely (for example, if you manage IRQ/RPS manually).
+
+When affinity setup is enabled, optional variables in `/etc/nvmesh/nvmesh.conf` are passed through to `nvmesh_set_tcp_affinity` as follows:
+
+| Variable | Role |
+|----------|------|
+| **`TCP_NUM_RX_QUEUE`** | Target number of RX queues (`--queues`). |
+| **`TCP_SET_NUM_RX_QUEUE`** | If `Yes` or `True`, sets the queue count via ethtool when needed (`--setrxq`). |
+| **`TCP_NUM_CHANNELS`** | Number of NRCH channels to use (`--channels`). |
+| **`TCP_RX_CPU_AFFINITY_DOMAIN`** | CPU affinity domain for mapping queues to CPUs (`--domain`), for example `pernuma`, `persocket`, `fullspread`, `pernuma_thread0`, `persocket_thread0`, or an explicit comma-separated CPU list. |
+| **`TCP_RX_SET_IRQ_AFFINITY`** | Set to `No` or `False` to avoid programming IRQ affinity from the script (`--noirq`). |
+| **`TCP_FLOW_STEER`** | Flow-steering mode (`--flowsteer`): `rfs`, `ntuple`, or `none`. See [Flow steering, RSS, and multi-port listeners](#flow-steering-rss-and-multi-port-listeners). |
+| **`TCP_RPS_MODE`** | RPS mode (`--rpsmode`): for example `alldomain`, `irq_range_wrap`, `irq_neighbour`, `off`, or `donttouch`. |
+
+The script also supplies the SIW base port (`--port`) so steering matches NVMesh’s listener layout. See the script’s help output on a node (`nvmesh_set_tcp_affinity --help`) for the full set of options and semantics.
+
+Unless **`TCP_RX_SET_IRQ_AFFINITY`** is set to **`No`** or **`False`**, the affinity script **programs IRQ affinities** for the relevant NIC queues. **Disable system IRQ balancing** for those interfaces (for example turn off the **`irqbalance`** service, and any similar daemon that periodically reapplies IRQ masks), so it does **not override** NVMesh’s settings after startup. If you rely on **`irqbalance`** or vendor IRQ tools instead, use **`TCP_RX_SET_IRQ_AFFINITY="No"`** and manage affinity consistently in one place. For general background on **`irqbalance`** versus static affinity, see [CPU Interrupt Affinity and IRQ Balancing](#cpu-interrupt-affinity-and-irq-balancing).
+
+#### Flow steering, RSS, and multi-port listeners
+
+The **`TCP_FLOW_STEER`** variable selects among these modes. If it is **not** set in `nvmesh.conf`, the affinity script uses its built-in default, which is **`none`**.
+
+- **`none`** — NVMesh does **not** install static flow-steering rules. The NIC chooses the receive queue from the **RSS indirection table** and the **RSS hash** of each packet (when RSS is enabled). To improve spreading across queues in this mode, the **target opens multiple secondary SIW TCP listeners** on consecutive ports starting at the configured base port. With the **`tcp_num_ports`** common-module parameter at **`0`** (the default), the **listener count is the number of online CPUs**. That gives **different TCP flows (different destination ports)** distinct listeners so they **hash differently under RSS**, improving parallelism. For a fixed listener count, set **`tcp_num_ports`** to a non-zero value; see [Module Parameters](#module-parameters).
+
+- **`ntuple`** — The script enables **ntuple** filtering and installs **static ethtool rules** that map each SIW listener port to a **specific RX queue**. That lets the **NVMesh client** attach each I/O channel to a **chosen listener port** so traffic for that channel is steered to the **intended RX queue**, which can yield more predictable and better spreading than RSS alone. This mode is **not** the default because **not all NICs or drivers support ntuple filtering**, and hardware tables enforce a **limited number of rules**—enable it only after confirming support on your adapter.
+
+- **`rfs`** — Uses **accelerated RFS** (where the driver supports it): receive processing is steered so that traffic tends to be handled on the **same CPU as related socket and SoftiWarp TX work**, which reduces cross-CPU handoffs and can **lower latency**. Requirements differ from `ntuple`. See [Latency versus throughput](#latency-versus-throughput) for how this fits with client-side module settings, and the script comments and help output on the node for details.
+
+#### Latency versus throughput
+
+TCP tuning for NVMesh often trades **aggregate bandwidth** against **consistent low latency**. **Throughput** is usually helped by **spreading** work—many RX queues, RSS or static **ntuple** rules, and a wide mapping of channels to CPUs—so the NIC and host process more packets in parallel. **Latency** is usually helped by **locality**: keeping **softirq receive handling**, the **TCP socket**, and **NVMesh’s IO and locking path** on the **same or nearby CPUs** so work does not bounce across cores or NUMA nodes.
+
+**Latency-oriented recommendations (SoftiWarp / TCP clients)**
+
+1. **`TCP_FLOW_STEER="rfs"`** in `/etc/nvmesh/nvmesh.conf` — When the affinity script runs with **`rfs`**, it configures receive steering so that **RFS** can direct flows toward the CPUs where the application and SoftiWarp transmit context run, which helps **keep the socket aligned with the IO CPU** instead of spreading receives arbitrarily across RSS queues. This depends on driver support for RFS and related interfaces; see [Flow steering, RSS, and multi-port listeners](#flow-steering-rss-and-multi-port-listeners).
+
+2. **`nr_get_by_cpu_index_tcp=1`** on the **client** — Set on the **`nvmeibc`** kernel module (for example via `modprobe.d` or `/sys/module/nvmeibc/parameters/nr_get_by_cpu_index_tcp` after load). The default is often **`0`** (disabled); set **`1`** for latency-oriented CPU–channel affinity. With **`1`**, the client selects the **network receive / IO channel (nrch)** using the **CPU index** of the submitting context, which **pins the data path to the originating CPU’s channel** instead of generic selection. Values: **`0`** disables CPU-index selection; **`1`** enables it; **`2`** or higher enables CPU-index selection **with fallback** to other schemes if needed.
+
+3. **`lock_ch_get_method_tcp=1`** on the **client** — Also on **`nvmeibc`**. **`1`** selects the **BY_CPU** policy: the **locks channel** is chosen **by CPU** ( **`0`** = LRU with sharding tie-break, **`2`** = sharding by destination address). For lowest latency, **`1`** keeps lock traffic aligned with the same CPU-centric view as the IO path. On many installations this is already the default; confirm with `/sys/module/nvmeibc/parameters/lock_ch_get_method_tcp`.
+
+4. **`cq_vec_flags_tcp=6`** on the **NVMesh common** module (`nvmeib_common`) — Completion queues for TCP/SIW use a **bitmask**. **`6`** sets **both** **bit 1** (index-based vectors from the channel or CQ creator index) **and** **bit 2** (the **same** completion vector for send and receive CQs). That combination **selects by index** and keeps **send and receive completions on the same completion vector** (so they share the same IRQ / **CPU** affinity for that vector), which tightens locality on the completion path versus using only one of those bits. The shipped default is often **`4`** (**bit 2** only—same SCQ/RCQ vector **without** index-based selection). Set via `modprobe.d` or `/sys/module/nvmeib_common/parameters/cq_vec_flags_tcp` where supported. See [NVMesh common module parameter: `cq_vec_flags_tcp`](#nvmesh-common-module-parameter-cq_vec_flags_tcp).
+
+Together, **`rfs`** addresses **NIC receive locality**; **`nr_get_by_cpu_index_tcp`**, **`lock_ch_get_method_tcp`**, and **`cq_vec_flags_tcp`** align **IO, locking, and completion handling** with the **CPU and channel** that drive the workload. These choices can **reduce peak aggregate throughput** if they concentrate work on fewer hardware queues or reduce spreading; validate with your workload.
+
+**Throughput-oriented contrast**
+
+For **maximum bandwidth**, favor the patterns in [Configuration-oriented recommendations](#configuration-oriented-recommendations) and [Flow steering, RSS, and multi-port listeners](#flow-steering-rss-and-multi-port-listeners): for example **`TCP_FLOW_STEER="none"`** or **`"ntuple"`**, higher queue and channel counts, and NUMA-aware spreading—often at the cost of **higher tail latency** or more cross-CPU traffic.
+
+See [Module Parameters](#module-parameters) for defaults and full descriptions of **`nr_get_by_cpu_index_tcp`**, **`lock_ch_get_method_tcp`**, and **`cq_vec_flags_tcp`**.
+
+#### NVMesh common module parameter: `cq_vec_flags_tcp`
+
+The **`cq_vec_flags_tcp`** parameter on the NVMesh common module (`nvmeib_common`) applies to **completion-queue vector selection for TCP (SIW)** paths. It uses the same flag bits as **`cq_vec_flags`** for RDMA: bit 0 reserves vector 0 for userspace, bit 1 selects **index-based** vector assignment, and bit 2 uses the **same completion vector for send and receive** CQs. For **latency-oriented** TCP tuning, **[Latency versus throughput](#latency-versus-throughput)** recommends **`cq_vec_flags_tcp=6`** (**bit 1** index-based **and** **bit 2** same SCQ/RCQ vector), which differs from a typical default of **`4`** (same SCQ/RCQ only, **without** index-based selection). Tuning this can help when spreading or concentrating completions to match your IRQ and CPU layout. See [Module Parameters](#module-parameters) for the authoritative description and current defaults.
+
+#### Configuration-oriented recommendations
+
+These are **starting points**, not universal rules—always measure with representative I/O.
+
+- **Many CPU cores**  
+  You can often increase **`TCP_NUM_RX_QUEUE`** and **`TCP_NUM_CHANNELS`** (within NIC and driver limits) so traffic and completions spread across more queues and CPUs. Prefer a **NUMA-aware** **`TCP_RX_CPU_AFFINITY_DOMAIN`** (for example `pernuma` or an explicit list of CPUs local to the NIC) to avoid remote-memory access. For receive-side spreading, see [Flow steering, RSS, and multi-port listeners](#flow-steering-rss-and-multi-port-listeners): default **`TCP_FLOW_STEER`** relies on **RSS** and multi-port listeners; **`TCP_FLOW_STEER="ntuple"`** can improve steering when your hardware supports it. Consider **`TCP_RPS_MODE`** as well; incorrect combinations can hurt latency, so change one dimension at a time.
+
+- **Small number of cores**  
+  Use **fewer RX queues** and **lower channel counts** so you do not spread work across more CPUs than exist or starve application threads. **`persocket`** or a **short explicit CPU list** for **`TCP_RX_CPU_AFFINITY_DOMAIN`** is often appropriate. On **clients**, you can cap TCP channel usage with the **`nvmeibc`** module parameters **`nr_max_channels_per_path_tcp`** (maximum IO channels per path for TCP) and **`max_lock_channels_tcp`** (maximum lock channels per disk for TCP, including secondary channels). Lower values reduce connection and locking parallelism—appropriate when core count is low. See [Module Parameters](#module-parameters). If hyperthreads contend on the same physical core, consider pinning workloads or reducing parallelism so pairs of hyperthreads are not saturated by competing work. Avoid aggressive RPS unless you have verified IRQ load.
+
+- **One NIC per NUMA node (multi-NIC)**  
+  Treat each NIC as a **separate NUMA domain**: use **`pernuma`** (or per-device CPU lists) so each interface’s steering stays on the local socket.
+
+- **Single NIC**  
+  A single interface must carry all traffic; balance **queue count** with **core count** and leave headroom for the OS and NVMesh userspace. **`persocket`** or **`fullspread`** may apply depending on whether you want to concentrate on one socket or use both sockets on dual-socket servers—profile both if the NIC is attached to one NUMA node. If IRQ affinity is managed by another tool (for example vendor tuning), set **`TCP_RX_SET_IRQ_AFFINITY`** to `No` and avoid double-configuration.
+
+- **Manual IRQ/RPS tuning**  
+  If you already apply a vendor profile or custom IRQ layout, disable NVMesh’s IRQ step with **`TCP_RX_SET_IRQ_AFFINITY="No"`**, or disable the whole script with **`TCP_SET_AFFINITY="No"`**, and keep **`TCP_RPS_MODE=donttouch`** unless you intend to change RPS from NVMesh.
+
+For RDMA-centric tuning (IRQ balance, NVIDIA tools, and related topics), see [CPU Interrupt Affinity and IRQ Balancing](#cpu-interrupt-affinity-and-irq-balancing). TCP/SIW-specific tuning complements that guidance when traffic uses SoftiWarp instead of or in addition to RoCE.
 
 ## Software Delivery
 
